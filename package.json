@@ -1,0 +1,18 @@
+{
+  "name": "buzzer-configuration",
+  "version": "1.0.0",
+  "description": "Application en charge de configurer le buzzer pour Burger Quizz",
+  "main": "main.js",
+  "scripts": {
+    "start": "electron ."
+  },
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "electron": "^4.0.6"
+  },
+  "dependencies": {
+    "jquery": "^3.3.1",
+    "materialize-css": "^1.0.0"
+  }
+}

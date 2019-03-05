@@ -1,0 +1,36 @@
+<html>
+
+<head>
+    <title>Configruation</title>
+    <link rel="stylesheet" href="../../../node_modules/materialize-css/dist/css/materialize.min.css">
+    <script type="text/javascript">window.$ = window.jQuery = require('jquery');</script>
+    <script type="text/javascript" src="../../../node_modules/materialize-css/dist/js/materialize.min.js"></script>
+</head>
+
+<body>
+    <h1>Hello World</h1>
+    <div class="row">
+        <form class="col s12">
+            <div class="row">
+                <div class="input-field col s8">
+                    <input id="input_text" type="text" data-length="10" maxlength="10">
+                    <label for="input_text">Input text</label>
+                </div>
+            </div>
+            <div class="row">
+                <div class="input-field col s12">
+                    <textarea id="textarea2" class="materialize-textarea" data-length="120"></textarea>
+                    <label for="textarea2">Textarea</label>
+                </div>
+            </div>
+        </form>
+    </div>
+</body>
+
+<script type="text/javascript">   
+    $(document).ready(function () {
+        $('input#input_text, textarea#textarea2').characterCounter();
+    });
+</script>
+
+</html>

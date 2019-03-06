@@ -1,6 +1,7 @@
 <html>
 
 <head>
+    <meta charset="UTF-8">
     <title>Configruation</title>
     <link rel="stylesheet" href="../../../node_modules/materialize-css/dist/css/materialize.min.css">
     <link rel="stylesheet" href="../../../node_modules/material-icons/iconfont/material-icons.css">
@@ -9,8 +10,14 @@
 </head>
 
 <body>
-    <div class="container">
-        <h1>Hello World</h1>
+    <div id="progress-bar-container" class="center-align">
+        <p>Recherche des buzzer en cours . . .</p>
+        <div id="progress-bar" class="progress">
+            <div class="indeterminate"></div>
+        </div>
+    </div>
+    <!--<div class="container">
+         <h1>Hello World</h1>
         <div class="row">
             <form class="col s12">
                 <div class="row">
@@ -25,13 +32,22 @@
                         <label for="input_text">Input text</label>
                     </div>
                 </div>
-                <button class="btn waves-effect waves-light" type="submit" name="action">Submit
+                <button class="btn waves-effect waves-light" type="submit" name="action">Enregistrer
                     <i class="material-icons right">send</i>
                 </button>
             </form>
         </div>
-    </div>
+        <div class="row">
+            <div class="collection">
+                <a href="#!" class="collection-item">Alvin</a>
+                <a href="#!" class="collection-item">Alvin</a>
+                <a href="#!" class="collection-item">Alvin</a>
+                <a href="#!" class="collection-item">Alvin</a>
+              </div>
+        </div>
+    </div>-->
 </body>
+<script type="text/javascript" src="../../services/wifiService.js"></script>
 <script type="text/javascript" src="main.js"></script>
 
 </html>

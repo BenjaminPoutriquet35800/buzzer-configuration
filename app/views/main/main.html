@@ -3,6 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <title>Configruation</title>
+    <link rel="stylesheet" href="main.css">
     <link rel="stylesheet" href="../../../node_modules/materialize-css/dist/css/materialize.min.css">
     <link rel="stylesheet" href="../../../node_modules/material-icons/iconfont/material-icons.css">
     <script type="text/javascript">window.$ = window.jQuery = require('jquery');</script>
@@ -10,44 +11,78 @@
 </head>
 
 <body>
-    <div id="progress-bar-container" class="center-align">
-        <p>Recherche des buzzer en cours . . .</p>
-        <div id="progress-bar" class="progress">
-            <div class="indeterminate"></div>
+    <div class="valign-wrapper" style="width:100%;height:100%;position: absolute;">
+        <div class="valign" style="width:100%;">
+            <div class="container center-align">
+                <div id="container-progress-bar-search">
+                    <!-- Libellé -->
+                    <div class="row">
+                        <p>Recherche des buzzer en cours . . .</p>
+                    </div>
+                    <!-- Progress bar -->
+                    <div class="row">
+                        <div class="preloader-wrapper active">
+                            <div class="spinner-layer spinner-red-only">
+                                <div class="circle-clipper left">
+                                    <div class="circle"></div>
+                                </div>
+                                <div class="gap-patch">
+                                    <div class="circle"></div>
+                                </div>
+                                <div class="circle-clipper right">
+                                    <div class="circle"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div>
+                    <div class="row">
+                        <p>Liste des buzzer's à configurer :</p>
+                    </div>
+                    <div class="row">
+                        <div class="collection" id="ssid-collection"></div>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
-    <!--<div class="container">
-         <h1>Hello World</h1>
-        <div class="row">
-            <form class="col s12">
-                <div class="row">
-                    <div class="input-field col s10">
-                        <input id="input_text" type="text" data-length="10" maxlength="10">
-                        <label for="input_text">Input text</label>
-                    </div>
+    <!-- <div class="valign-wrapper" style="width:100%;height:100%;position: absolute;">
+            <div class="valign" style="width:100%;">
+                <div class="container">
+                   <div class="row">
+                      <div class="col s12 m6 offset-m3">
+                         <div class="card">
+                            <div class="card-content">
+                               <span class="card-title black-text">Sign In</span>
+                               <form>
+                                  <div class="row">
+                                     <div class="input-field col s12">
+                                        <input placeholder="Placeholder" id="firstname" type="text" class="validate">
+                                        <label for="firstname" class="active">First Name</label>
+                                     </div>
+                                  </div>
+                                  <div class="row">
+                                     <div class="input-field col s12">
+                                        <input placeholder="Placeholder" id="lastname" type="text" class="validate">
+                                        <label for="lastname" class="active">Last Name</label>
+                                     </div>
+                                  </div>
+                               </form>
+                            </div>
+                            <div class="card-action">
+                               <input type="submit" class="btn" value="Sign In">
+                            </div>
+                         </div>
+                      </div>
+                   </div>
                 </div>
-                <div class="row">
-                    <div class="input-field col s10">
-                        <input id="input_text" type="text" data-length="10" maxlength="10">
-                        <label for="input_text">Input text</label>
-                    </div>
-                </div>
-                <button class="btn waves-effect waves-light" type="submit" name="action">Enregistrer
-                    <i class="material-icons right">send</i>
-                </button>
-            </form>
-        </div>
-        <div class="row">
-            <div class="collection">
-                <a href="#!" class="collection-item">Alvin</a>
-                <a href="#!" class="collection-item">Alvin</a>
-                <a href="#!" class="collection-item">Alvin</a>
-                <a href="#!" class="collection-item">Alvin</a>
-              </div>
-        </div>
-    </div>-->
+            </div>
+        </div> -->
 </body>
 <script type="text/javascript" src="../../services/wifiService.js"></script>
+<script type="text/javascript" src="../../utils/dom-helper.js"></script>
 <script type="text/javascript" src="main.js"></script>
 
 </html>

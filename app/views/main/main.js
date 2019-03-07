@@ -1,23 +1,70 @@
-const Swal = require('sweetalert2')
+/**
+ * Inclusions
+ */
+const Swal = require('sweetalert2');
+
+const titleRetrieveBuzzers = 'Récupération des buzzers';
 
 /**
- * Se charge d'initialiser les compteurs de caractères
- * Du formulaire de configuration
+ * Composants
  */
-const initCharacterCounterInputs = function () {
-    $('input#input_text, textarea#textarea2').characterCounter();
+const $ssidCollection = $('#ssid-collection');
+const $containerPgbSearchBuzzer = $('#container-progress-bar-search');
+
+/**
+ * Service en charge de la Wifi
+ */
+var wifiService = new wifiService();
+
+/**
+ * Se charge de cacher la fenêtre de progress bar
+ */
+const hiddenProgressBarContainer = function () {
+    $containerPgbSearchBuzzer.hide("slow");
 }
 
-initCharacterCounterInputs();
+/**
+ * Se charge de scanner les SSID's BGQ
+ * Disponible sur le réseau
+ */
+const scanNetworksBGQ = function () {
+    wifiService.scanNetworksBGQ(function (error, networks) {
+        if (error) {
+            Swal.fire(titleRetrieveBuzzers, error.message, 'error');
+            return;
+        }
+        if (!(networks instanceof Array)) {
+            Swal.fire(titleRetrieveBuzzers, `Aucun buzzers n'a été trouvé`, 'error');
+            return;
+        }
+        showNetworksBGQ(networks);
+    });
+}
 
-var test = new wifiService();
+/**
+ * Affiche la liste des buzzer's BGQ
+ * Que l'on va configurer
+ */
+const showNetworksBGQ = function (networks) {
+    let time = 500;
+    let displayNetworks = networks.map((element) => {
+        // Créer une promesse pour chaque element
+        return new Promise((resolve) => {
+            // Affiche les elements toutes les 500 ms
+            setTimeout(function () {
+                var hyperLink = createHrefElement(element.ssid, '#', 'collection-item');
+                $ssidCollection.append(hyperLink);
+                resolve();
+            }, time);
+            time += 1000;
+        })
+    });
+    // Attends que toutes les promesses soit résolu
+    // Pour masquer la progressbar
+    Promise.all(displayNetworks).then(() => {
+        hiddenProgressBarContainer();
+    });
+}
 
-test.scanNetworksBGQ(function (error, networks) {
-    if (error) {
-        Swal.fire('Récupération des buzzers', error.message, 'error');
-        return;
-    }
-    
-});
-
-
+// Scan dès le lancement de l'application
+scanNetworksBGQ();

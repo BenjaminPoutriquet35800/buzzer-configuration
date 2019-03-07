@@ -7,12 +7,18 @@ const { app, BrowserWindow, Menu } = electron;
 let mainWindow = null;
 
 app.on('ready', function () {
-    // Création de la fenêtre principale
-    mainWindow = createWindowsWithFileView('/app/views/main/main.html');
-    initEventsMainWindows();
-    const mainMenuTemplate = renderMainMenuTemplate();
-    // Création du menu
-    buildMenuFromTemplate(mainMenuTemplate);
+    // Création de la fenêtre principale 
+    mainWindow = createWindowsWithFileView('/app/views/main/main.html', {
+        height: 850,
+        width: 1450,
+        center: true,
+        resizable: true,    
+        //frame: false
+    });
+initEventsMainWindows();
+const mainMenuTemplate = renderMainMenuTemplate();
+// Création du menu
+buildMenuFromTemplate(mainMenuTemplate);
 });
 
 /**

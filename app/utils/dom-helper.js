@@ -4,7 +4,7 @@ function createHrefElement(value, link, className, onClickFunc) {
     hyperLink.className = className;
     hyperLink.href = link;
     if (typeof onClickFunc === 'function') {
-        hyperLink.onclick = hyperLink;
+        hyperLink.onclick = onClickFunc;
     }
     return hyperLink;
 }

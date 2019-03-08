@@ -13,21 +13,21 @@ function wifiService() {
      */
     this.scanNetworksBGQ = function (callBackNetworks) {
         wifi.scan(function (err, networks) {
-            let networksBgq = [];
-            callBackNetworks(null,[
-                {
-                    ssid: 'Test1',
-                    quality: 80
-                },
-                {
-                    ssid : 'Test2',
-                    quality: 50
-                }
-            ]);
-            return;
+             let networksBgq = [];
+            // callBackNetworks(null,[
+            //     {
+            //         ssid: 'Test1',
+            //         quality: 80
+            //     },
+            //     {
+            //         ssid : 'Test2',
+            //         quality: 50
+            //     }
+            // ]);
+            // return;            
 
             // Tri des SSID's si il n'y a aucune erreur
-            if (!err || typeof networks !== 'array') {
+            if (err ||  !(networks instanceof Array)) {
                 callBackNetworks(err, networksBgq);
                 return;
             }
@@ -36,8 +36,8 @@ function wifiService() {
                 if(element.ssid.includes(defaultSSID)){
                     networksBgq.push(element);
                 }
-            });
-            callBackNetworks(err, networksBgq);
+            });            
+            callBackNetworks(err, networks);
         });
     }
 }

@@ -52,11 +52,13 @@ const showNetworksBGQ = function (networks) {
         return new Promise((resolve) => {
             // Affiche les elements toutes les 500 ms
             setTimeout(function () {
-                var hyperLink = createHrefElement(element.ssid, '#', 'collection-item');
+                var hyperLink = createHrefElement(element.ssid, '#', 'collection-item', function () {
+                    console.log(element);
+                });
                 $ssidCollection.append(hyperLink);
                 resolve();
             }, time);
-            time += 1000;
+            time += 500;
         })
     });
     // Attends que toutes les promesses soit résolu

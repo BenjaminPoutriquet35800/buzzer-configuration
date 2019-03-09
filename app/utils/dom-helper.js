@@ -1,4 +1,4 @@
-function createHrefElement(value, link, className, onClickFunc) {
+function createHyperLinkElement(value, link, className, onClickFunc) {
     var hyperLink = document.createElement('a');
     hyperLink.innerHTML = value;
     hyperLink.className = className;

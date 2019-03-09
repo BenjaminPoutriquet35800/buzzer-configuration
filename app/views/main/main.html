@@ -6,7 +6,9 @@
     <link rel="stylesheet" href="main.css">
     <link rel="stylesheet" href="../../../node_modules/materialize-css/dist/css/materialize.min.css">
     <link rel="stylesheet" href="../../../node_modules/material-icons/iconfont/material-icons.css">
-    <script type="text/javascript">window.$ = window.jQuery = require('jquery');</script>
+    <script type="text/javascript">
+        window.$ = window.jQuery = require('jquery');
+    </script>
     <script type="text/javascript" src="../../../node_modules/materialize-css/dist/js/materialize.min.js"></script>
 </head>
 
@@ -36,7 +38,6 @@
                         </div>
                     </div>
                 </div>
-
                 <div>
                     <div class="row">
                         <p>Liste des buzzer's à configurer :</p>
@@ -44,6 +45,11 @@
                     <div class="row">
                         <div class="collection" id="ssid-collection"></div>
                     </div>
+                </div>
+                <div class="row">
+                    <button id="button-scan" style="display:none;" class="btn waves-effect waves-light">Scanner
+                        <i class="material-icons right">network_check</i>
+                    </button>
                 </div>
             </div>
         </div>

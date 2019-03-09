@@ -9,8 +9,8 @@ let mainWindow = null;
 app.on('ready', function () {
     // Création de la fenêtre principale 
     mainWindow = createWindowsWithFileView('/app/views/main/main.html', {
-        height: 850,
-        width: 1450,
+        // height: 850,
+        // width: 1450,
         center: true,
         resizable: true,    
         //frame: false

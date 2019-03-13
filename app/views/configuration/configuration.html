@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <title>Configuration</title>
+    <link rel="stylesheet" href="configuration.css">
+    <link rel="stylesheet" href="../../../node_modules/materialize-css/dist/css/materialize.min.css">
+    <link rel="stylesheet" href="../../../node_modules/material-icons/iconfont/material-icons.css">
+    <script type="text/javascript">
+        window.$ = window.jQuery = require('jquery');
+    </script>
+    <script type="text/javascript" src="../../../node_modules/materialize-css/dist/js/materialize.min.js"></script>
+</head>
+
+<body>
+    <div class="valign-wrapper" style="width:100%;height:100%;position: absolute;">
+        <div class="valign" style="width:100%;">
+            <div class="container">
+                <div class="row">
+                    <div class="col s12 m6 offset-m3">
+
+                        <span class="card-title black-text">Configuration du buzzer</span>
+                        <form>
+                            <div class="row">
+                                <div class="input-field col s12">
+                                    <select id="ssid-selector">
+                                        <option value="" disabled selected>Choisir SSID</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="input-field col s12">
+                                    <input id="password" type="text" class="validate">
+                                    <label for="password" class="active">Mot de passe Wifi</label>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="input-field col s12">
+                                    <input id="server-ip-bgq" type="text" class="validate">
+                                    <label for="server-ip-bgq" class="active">Ip serveur BGQ</label>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="input-field col s12">
+                                    <select id="team-selector">
+                                        <option value="" disabled selected>Choisir Equipe</option>
+                                        <option value="mayo" data-icon="../public/images/teams/mayo.svg">Mayo</option>
+                                        <option value="ketchup" data-icon="../public/images/teams/ketchup.svg">Ketchup</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                    <div class="card-action">
+                        <input id="button-register" type="submit" class="btn" value="Sign In">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+<script type="text/javascript" src="../../services/wifiService.js"></script>
+<script type="text/javascript" src="../../services/clientCommunicatorService.js"></script>
+<script type="text/javascript" src="configuration.js"></script>
+
+</html>

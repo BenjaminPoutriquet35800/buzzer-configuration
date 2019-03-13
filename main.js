@@ -2,24 +2,56 @@ const electron = require('electron');
 const url = require('url');
 const path = require('path');
 
-const { app, BrowserWindow, Menu } = electron;
+const {
+    app,
+    BrowserWindow,
+    Menu,
+    ipcMain
+} = electron;
 
 let mainWindow = null;
+let configurationWindow = null;
 
 app.on('ready', function () {
+    createMainWindows();
+    initMainMenuTemplate();
+    initIpcMainEvents();
+});
+
+/**
+ * Se charge de créer la fenêtre principale
+ */
+const createMainWindows = function () {
     // Création de la fenêtre principale 
     mainWindow = createWindowsWithFileView('/app/views/main/main.html', {
         // height: 850,
         // width: 1450,
         center: true,
-        resizable: true,    
+        resizable: true,
         //frame: false
+        webPreferences: {
+            nodeIntegration: true
+        }
     });
-initEventsMainWindows();
-const mainMenuTemplate = renderMainMenuTemplate();
-// Création du menu
-buildMenuFromTemplate(mainMenuTemplate);
-});
+    initEventsMainWindows();
+}
+
+/**
+ * Se charge de créer la vue permettant
+ * De configurer le buzzer
+ * @param {*} network Le réseau sur lequel on se connecte
+ */
+const createConfigurationWindows = function (network) {
+    configurationWindow = createWindowsWithFileView('/app/views/configuration/configuration.html', {
+        //frame: false
+        height: 800,
+        width: 600,
+        webPreferences: {
+            nodeIntegration: true
+        }
+    });
+    initEventsConfigurationWindows();
+}
 
 /**
  * Se charge de créer une fenêtre
@@ -38,12 +70,41 @@ const createWindowsWithFileView = function (viewPathFile, windowProperties) {
 }
 
 /**
+ * Se charge d'initialiser les évènements d'ipcMain
+ */
+const initIpcMainEvents = function () {
+    ipcMain.on('connected:success', (event, network) => {
+        mainWindow.hide();
+        createConfigurationWindows(network);
+    });
+}
+
+/**
  * Initialise les évènements de la vue principale
  */
 const initEventsMainWindows = function () {
     mainWindow.on('close', function () {
         app.quit();
+    });
+}
+
+/**
+ * Initialise les évènements de la vue de configuration
+ */
+const initEventsConfigurationWindows = function () {
+    configurationWindow.on('close', function () {
+        configurationWindow = null;
+        mainWindow.show();
     })
+}
+
+/**
+ * Initialise le menu principal
+ */
+const initMainMenuTemplate = function () {
+    const mainMenuTemplate = renderMainMenuTemplate();
+    // Création du menu
+    buildMenuFromTemplate(mainMenuTemplate);
 }
 
 /**
@@ -61,8 +122,7 @@ const buildMenuFromTemplate = function (template) {
  */
 const buildDevMenuItems = function () {
     // Construit le sous menu de développement
-    const subMenuDevTools = [
-        {
+    const subMenuDevTools = [{
             label: "Debug",
             accelerator: 'F12',
             click(item, focusedWindow) {

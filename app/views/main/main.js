@@ -2,6 +2,10 @@
  * Inclusions
  */
 const Swal = require('sweetalert2');
+const electron = require('electron');
+const {
+    ipcRenderer
+} = electron;
 
 const titleRetrieveBuzzers = 'Récupération des buzzers';
 const titleErrorWifiConnection = 'Echec connexion Wifi :(';
@@ -12,53 +16,27 @@ const titleErrorWifiConnection = 'Echec connexion Wifi :(';
 const $ssidCollection = $('#ssid-collection');
 const $containerPgbSearchBuzzer = $('#container-progress-bar-search');
 const $buttonScan = $('#button-scan');
+const $modalConnection = $('#modal-connection');
 
 /**
  * Timer par défaut qui se chargera
  * D'afficher un réseau trouvé toutes les X ms
  */
-const defaultTimerDisplayNetwork = 0;
-
-/**
- * Les network's BGQ que l'on va stocker
- * Cette liste va nous permettre par la suite
- * De filtrer ceux qui ne sont plus présent
- * Lors d'un prochain scan
- */
-var networksBGQ = [];
+const defaultTimerDisplayNetwork = 300;
 
 /**
  * Service en charge de la Wifi
  */
 var wifiService = new wifiService();
+/**
+ * Service en charge d'afficher les messages
+ */
+var sweetAlertService = new sweetAlertService();
 
 /**
- * Se charge d'afficher un composant si ce n'est pas déjà le cas
- * @param {*} $component Le composant à afficher
- * @param {*} withEffect Indique si l'on veut jouer un effet
+ * Service en charge de communiquer avec l'ESP
  */
-const showComponent = function ($component, withEffect) {
-    if (!$component.is(':hidden'))
-        return;
-    if (withEffect)
-        $component.show("slow");
-    else
-        $component.show();
-}
-
-/**
- * Se charge de cacher un composant si ce n'est pas déjà le cas
- * @param {*} $component Le composant à cacher
- * @param {*} withEffect Indique si l'on veut jouer un effet
- */
-const hiddenComponent = function ($component, withEffect) {
-    if ($component.is(':hidden'))
-        return;
-    if (withEffect)
-        $component.hide("slow");
-    else
-        $component.hide();
-}
+var clientCommunicatorService = new clientCommunicatorService();
 
 /**
  * Se charge de vider la collection des SSID's de la vue
@@ -76,25 +54,23 @@ const cleanupSSIDCollection = function () {
 const scanNetworksBGQ = function (doneCallBack) {
     wifiService.scanNetworksBGQ(function (error, networks) {
         if (error) {
-            Swal.fire(titleRetrieveBuzzers, error.message, 'error');
+            sweetAlertService.showError(titleRetrieveBuzzers, error.message);
             if (typeof doneCallBack === 'function')
                 doneCallBack();
             return;
         }
-        if (!(networks instanceof Array)) {
-            Swal.fire(titleRetrieveBuzzers, `Aucun buzzers n'a été trouvé`, 'error');
+        if (!(networks instanceof Array) || networks.length == 0) {
+            sweetAlertService.showError(titleRetrieveBuzzers, `Aucun buzzers n'a été trouvé`);
             if (typeof doneCallBack === 'function')
                 doneCallBack();
             return;
         }
-        // Si il y'a plus d'un réseau présent
-        // On affiche la liste à l'utilisateur
-        if (networks.length > 1) {
-            showNetworksBGQ(networks, doneCallBack);
-            return
-        }
-        // Sinon on se connecte directement
-        detectConnectionModeAndConnectToWifi(networks[0]);
+        // Si il n'y a qu'un seul buzzer
+        // De détecté on s'y connecte directement
+        // if (networks.length == 1) {
+        //     detectConnectionModeAndConnectToWifi(networks[0]);
+        // }
+        showNetworksBGQ(networks, doneCallBack);
     });
 }
 
@@ -132,6 +108,12 @@ const appendNetworkToSSIDCollection = function (network) {
     let hyperLink = createHyperLinkElement(network.ssid, '#', 'collection-item', function () {
         detectConnectionModeAndConnectToWifi(network);
     });
+    // Créer un élément indiquant la qualité du réseau
+    let spanElement = createSpanElement(null, 'new badge', [{
+        property: 'data-badge-caption',
+        value: 'Qualité :' + network.quality + '/100'
+    }]);
+    hyperLink.append(spanElement);
     // On l'ajoute à notre collection
     $ssidCollection.append(hyperLink);
 }
@@ -148,9 +130,9 @@ const detectConnectionModeAndConnectToWifi = function (network) {
     // Protègé par un mot de passe
     // Si c'est le cas on le demande à l'utilisateur
     if (isProtected)
-        connectToNetworkWithPasswordWifi(network, performWhenConnected);
+        connectToNetworkWithPasswordWifi(network, redirectWhenConnectedToConfView);
     else
-        baseConnectWifi(network.ssid, null, performWhenConnected);
+        baseConnectWifi(network, null, redirectWhenConnectedToConfView);
 }
 
 /**
@@ -160,45 +142,55 @@ const detectConnectionModeAndConnectToWifi = function (network) {
  * Souhaite se connecter
  */
 const connectToNetworkWithPasswordWifi = function (network, callbackConnected) {
-    Swal.fire({
-        title: 'Mot de passe wifi',
-        input: 'text',
-        inputAttributes: {
-            autocapitalize: 'off'
-        },
-        showCancelButton: true,
-        cancelButtonText: 'Annuler',
-        confirmButtonText: 'Valider',
-        showLoaderOnConfirm: true,
-        preConfirm: (password) => {
-            baseConnectWifi(network.ssid, password, callbackConnected);
-        },
-        allowOutsideClick: () => !Swal.isLoading()
-    })
-}
-
-/**
- * Tente de se connecter à un point de terminaison Wifi
- * @param {*} ssid Le SSID de l'hôte sur lequel on souhaite se connecter
- * @param {*} password Le password de l'hôte
- * @param {*} callbackConnected Une callback permettant de récupère l'évènement
- * De connexion établie
- */
-const baseConnectWifi = function (ssid, password, callbackConnected) {
-    wifiService.connect(ssid, password, function (err) {
-        if (!err) {
-            callbackConnected();
-            return;
-        }
-        Swal.fire(titleErrorWifiConnection, err.message, 'error');
+    sweetAlertService.showWithRequireField('Mot de passe wifi', function (password) {
+        baseConnectWifi(network, password, callbackConnected);
     });
 }
 
 /**
- * Action à executer 
+ * Tente de se connecter à un point de terminaison Wifi
+ * @param {*} network L'entité detenant le SSID de l'hôte sur lequel on souhaite se connecter
+ * @param {*} password Le password de l'hôte
+ * @param {*} callbackConnected Une callback permettant de récupérer l'évènement
+ * De connexion établie
  */
-const performWhenConnected = function () {
-    console.log('Vous êtes connecté');
+const baseConnectWifi = function (network, password, callbackConnected) {
+    wifiService.getCurrentConnection(function (err, currentConnection) {
+        if (err) {
+            sweetAlertService.showError(titleErrorWifiConnection, error.message);
+            return;
+        }
+        showComponent($modalConnection);
+        // Si on est déjà sur le réseau on fait rien
+        // Et on passe à la callback suivante
+        if (currentConnection.ssid === network.ssid) {
+            callbackConnected(network);
+            return;
+        }
+        wifiService.connect(network.ssid, password, function (error) {
+            if (!error) {
+                callbackConnected(network);
+                return;
+            }
+            sweetAlertService.showError(titleErrorWifiConnection, error.message);
+        });
+    });
+}
+
+/**
+ * Redirige l'utilisateur sur la page
+ * De configuration si la connexion est établie
+ * @param {*} network Le réseau sur lequel on se connecte
+ */
+const redirectWhenConnectedToConfView = function (network) {
+    clientCommunicatorService.testConnectionWithServer(function (err) {
+        hiddenComponent($modalConnection);
+        if (!err) {
+            ipcRenderer.send('connected:success', network);            
+            return;
+        }
+        sweetAlertService.showError('Erreur', err.message);
+    });
 }
 
 /**

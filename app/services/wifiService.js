@@ -7,6 +7,9 @@ function wifiService() {
     wifi.init({
         iface: null
     });
+    // Valeur permettant d'attendre x ms
+    // Le temps que la connexion Wifi s'initialise correctement
+    const defaultSleepInitConnection = 1000;
     const defaultSSID = 'Esp8266-Burger-Quiz';
     // Protocols de sécuritée wifi
     const securityProtocols = [
@@ -53,9 +56,11 @@ function wifiService() {
             ssid: ssid,
             password: password
         };
-        // Se connecter
+        // Se connecte
         return wifi.connect(credentials, function (err) {
-            callBackConnected(err);
+            setTimeout(function () {
+                callBackConnected(err);
+            }, defaultSleepInitConnection);
         })
     }
     /**
@@ -68,24 +73,6 @@ function wifiService() {
                 return;
             }
             callBackCurrentConnection(err, currentConnections[0]);
-            /*
-            // you may have several connections
-            [
-                {
-                    iface: '...', // network interface used for the connection, not available on macOS
-                    ssid: '...',
-                    bssid: '...',
-                    mac: '...', // equals to bssid (for retrocompatibility)
-                    channel: <number>,
-                    frequency: <number>, // in MHz
-                    signal_level: <number>, // in dB
-                    quality: <number>, // same as signal level but in %
-                    security: '...' //
-                    security_flags: '...' // encryption protocols (format currently depending of the OS)
-                    mode: '...' // network mode like Infra (format currently depending of the OS)
-                }
-            ]
-            */
         });
     }
 

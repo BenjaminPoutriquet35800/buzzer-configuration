@@ -41,6 +41,18 @@
  }
 
  /**
+  * Se charge de créer un élément HTML option
+  * @param {*} value la valeur cacher par le composant
+  * @param {*} innerHTML La valeur à afficher
+  */
+ const createOptionElement = function(value,innerHTML) {
+     var option = document.createElement('option');
+     option.value = value;
+     option.innerHTML = innerHTML;
+     return option;
+ }
+
+ /**
   * Se charge d'afficher un composant si ce n'est pas déjà le cas
   * @param {*} $component Le composant (Jquery) à afficher 
   * @param {*} withEffect Indique si l'on veut jouer un effet

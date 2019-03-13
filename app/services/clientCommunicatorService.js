@@ -17,6 +17,7 @@ function clientCommunicatorService() {
      * Lequel on tent de se connecter
      */
     this.testConnectionWithServer = function (callBackRetrieve) {
+        console.log('Lancement du test');
         performRequestGet(routePingMe, callBackRetrieve);
     }
     /**
@@ -24,12 +25,14 @@ function clientCommunicatorService() {
      * Que l'ESP peut voir
      */
     this.getSSIDListFromServer = function (callBackRetrieve) {
+        console.log('Récupération des SSID');
         performRequestGet(routeSSIDList, callBackRetrieve);
     }
     /**
      * Obtient la configuration qu'a le serveur actuellement
      */
     this.getConfigurationFromServer = function (callBackRetrieve) {
+        console.log('Récupération de la configuration');
         performRequestGet(routeSettings, callBackRetrieve);
     }
     /**

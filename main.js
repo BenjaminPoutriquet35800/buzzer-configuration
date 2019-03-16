@@ -13,7 +13,8 @@ let mainWindow = null;
 let configurationWindow = null;
 
 app.on('ready', function () {
-    createMainWindows();
+    //createMainWindows();
+    createConfigurationWindows();
     initMainMenuTemplate();
     initIpcMainEvents();
 });
@@ -44,8 +45,8 @@ const createMainWindows = function () {
 const createConfigurationWindows = function (network) {
     configurationWindow = createWindowsWithFileView('/app/views/configuration/configuration.html', {
         //frame: false
-        height: 800,
-        width: 600,
+        // height: 800,
+        // width: 600,
         webPreferences: {
             nodeIntegration: true
         }
@@ -94,7 +95,8 @@ const initEventsMainWindows = function () {
 const initEventsConfigurationWindows = function () {
     configurationWindow.on('close', function () {
         configurationWindow = null;
-        mainWindow.show();
+        if (mainWindow)
+            mainWindow.show();
     })
 }
 

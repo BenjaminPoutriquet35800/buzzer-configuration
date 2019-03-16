@@ -41,17 +41,20 @@
                                 </div>
                             </div>
                             <div class="row">
-                                <div class="input-field col s12">
+                                <div id="team-container" class="input-field col s12">
                                     <select id="team-selector">
                                         <option value="" disabled selected>Choisir Equipe</option>
                                         <option value="mayo" data-icon="../public/images/teams/mayo.svg">Mayo</option>
                                         <option value="ketchup" data-icon="../public/images/teams/ketchup.svg">Ketchup</option>
                                     </select>
                                 </div>
+                                <div id="team-choosen-container" class="input-field col s1" style="display:none;">
+                                    <img id="img-team-chossen" height="50" />
+                                </div>
                             </div>
                         </form>
                     </div>
-                    <div class="card-action">
+                    <div class="col s12 m6 offset-m3">
                         <input id="button-register" type="submit" class="btn" value="Sign In">
                     </div>
                 </div>
@@ -61,6 +64,7 @@
 </body>
 <script type="text/javascript" src="../../services/wifiService.js"></script>
 <script type="text/javascript" src="../../services/clientCommunicatorService.js"></script>
+<script type="text/javascript" src="../../services/sweetAlertService.js"></script>
 <script type="text/javascript" src="../../utils/dom-helper.js"></script>
 <script type="text/javascript" src="configuration.js"></script>
 

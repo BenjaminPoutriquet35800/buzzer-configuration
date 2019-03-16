@@ -1,14 +1,19 @@
 /**
  * Inclusions
  */
-const Swal = require('sweetalert2');
 const electron = require('electron');
 const {
     ipcRenderer
 } = electron;
 
+/**
+ * Constantes
+ */
+const titleWifiPassword = 'Mot de passe wifi';
+const titleCannotConnect = 'Impossible de se connecter :(';
 const titleRetrieveBuzzers = 'Récupération des buzzers';
 const titleErrorWifiConnection = 'Echec connexion Wifi :(';
+const messageErrorNoBuzzerFounded = `Aucun buzzers n'a été trouvé`;
 
 /**
  * Composants
@@ -60,7 +65,7 @@ const scanNetworksBGQ = function (doneCallBack) {
             return;
         }
         if (!(networks instanceof Array) || networks.length == 0) {
-            sweetAlertService.showError(titleRetrieveBuzzers, `Aucun buzzers n'a été trouvé`);
+            sweetAlertService.showError(titleRetrieveBuzzers, messageErrorNoBuzzerFounded);
             if (typeof doneCallBack === 'function')
                 doneCallBack();
             return;
@@ -142,7 +147,7 @@ const detectConnectionModeAndConnectToWifi = function (network) {
  * Souhaite se connecter
  */
 const connectToNetworkWithPasswordWifi = function (network, callbackConnected) {
-    sweetAlertService.showWithRequireField('Mot de passe wifi', function (password) {
+    sweetAlertService.showWithRequireField(titleWifiPassword, function (password) {
         baseConnectWifi(network, password, callbackConnected);
     });
 }
@@ -156,17 +161,17 @@ const connectToNetworkWithPasswordWifi = function (network, callbackConnected) {
  */
 const baseConnectWifi = function (network, password, callbackConnected) {
     wifiService.getCurrentConnection(function (err, currentConnection) {
-        if (err) {
-            sweetAlertService.showError(titleErrorWifiConnection, error.message);
-            return;
-        }
         showComponent($modalConnection);
-        // Si on est déjà sur le réseau on fait rien
-        // Et on passe à la callback suivante
-        if (currentConnection.ssid === network.ssid) {
+        // Si aucune erreur on vient tester
+        // Si notre connexion actuelle est égal
+        // Au réseau auquel on souhaiter se connecter
+        // NOTA : Ici l'erreur peut survenir si on est connecté
+        // A aucun point wifi par exemple
+        if (!err && (currentConnection.ssid === network.ssid)) {
             callbackConnected(network);
             return;
         }
+        // On se connecter au point de terminaison souhaité
         wifiService.connect(network.ssid, password, function (error) {
             if (!error) {
                 callbackConnected(network);
@@ -186,10 +191,10 @@ const redirectWhenConnectedToConfView = function (network) {
     clientCommunicatorService.testConnectionWithServer(function (err) {
         hiddenComponent($modalConnection);
         if (!err) {
-            ipcRenderer.send('connected:success', network);            
+            ipcRenderer.send('connected:success', network);
             return;
         }
-        sweetAlertService.showError('Erreur', err.message);
+        sweetAlertService.showError(titleCannotConnect, err.message);
     });
 }
 

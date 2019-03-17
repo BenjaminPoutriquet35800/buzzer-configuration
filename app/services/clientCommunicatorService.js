@@ -19,28 +19,32 @@ function clientCommunicatorService() {
     this.testConnectionWithServer = function (callBackRetrieve) {
         console.log('Lancement du test');
         performRequestGet(routePingMe, callBackRetrieve);
+        return this;
     }
     /**
      * Récupère la liste des SSID's
      * Que l'ESP peut voir
      */
-    this.getSSIDListFromServer = function (callBackRetrieve) {
+    this.getSSIDList = function (callBackRetrieve) {
         console.log('Récupération des SSID');
         performRequestGet(routeSSIDList, callBackRetrieve);
+        return this;
     }
     /**
      * Obtient la configuration qu'a le serveur actuellement
      */
-    this.getConfigurationFromServer = function (callBackRetrieve) {
+    this.getConfiguration = function (callBackRetrieve) {
         console.log('Récupération de la configuration');
         performRequestGet(routeSettings, callBackRetrieve);
+        return this;
     }
     /**
      * Envoie la nouvelle configuration sur l'ESP8266
      */
-    this.sendConfigurationToServer = function () {
+    this.sendConfiguration = function () {
         // Construit la route
         //const route = getBaseRoute() + routeSettings;
+        return this;
     }
 
     /**
@@ -49,13 +53,17 @@ function clientCommunicatorService() {
      * @param {*} callBackDone La callBack permettant de récupérer la réponse
      */
     const performRequestGet = function (endpoint, callBackRetrieve) {
+        console.log(`Obtention de l'ip de la gateway en cours`);
         network.get_active_interface(function (err, obj) {
             if (err) {
+                console.log(`Récupération de l'ip de la gateway KO`);
                 callBackRetrieve(err, null, null);
                 return;
             }
+            console.log(`Récupération de l'ip de la gateway OK`);
             // Construit la route
             const route = scheme + obj.gateway_ip + endpoint;
+            console.log('Requete sur : ' + route)
             request.get(route, function (error, response, body) {
                 callBackRetrieve(error, response, body);
             });

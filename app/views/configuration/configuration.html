@@ -14,7 +14,7 @@
 </head>
 
 <body>
-    <div class="valign-wrapper" style="width:100%;height:100%;position: absolute;">
+    <div class="valign-wrapper base-container">
         <div class="valign" style="width:100%;">
             <div class="container">
                 <div class="row">
@@ -23,9 +23,22 @@
                         <form>
                             <div class="row">
                                 <div class="input-field col s12">
-                                    <select id="ssid-selector">
-                                        <option value="" disabled selected>Choisir SSID</option>
-                                    </select>
+                                    <div id="ssid-visibility-selector">
+                                        <select id="ssid-selector">
+                                            <option value="" disabled selected>Choisir SSID</option>
+                                        </select>
+                                    </div>
+                                    <div id="ssid-visibility-input" style="display:none;">
+                                        <input id="ssid" type="text" class="validate" placeholder="Rentrer un SSID">
+                                    </div>
+                                    <div class="switch">
+                                        <label>
+                                            Saisie libre Off
+                                            <input id="switch-input" type="checkbox">
+                                            <span class="lever"></span>
+                                            Saisie libre On
+                                        </label>
+                                    </div>
                                 </div>
                             </div>
                             <div class="row">
@@ -49,13 +62,42 @@
                                     </select>
                                 </div>
                                 <div id="team-choosen-container" class="input-field col s1" style="display:none;">
-                                    <img id="img-team-chossen" height="50" />
+                                    <img id="img-team-choosen" height="50" />
                                 </div>
                             </div>
                         </form>
                     </div>
                     <div class="col s12 m6 offset-m3">
-                        <input id="button-register" type="submit" class="btn" value="Sign In">
+                        <input id="button-register" type="submit" class="btn" value="Enregistrer">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Modal d'attente de récupération de configuration -->
+    <div id="modal-configuration" class="valign-wrapper base-container modal-configuration" style="display:none;">
+        <div class="valign" style="width:100%;">
+            <div class="container center-align">
+                <div id="container-progress-connection">
+                    <!-- Libellé -->
+                    <div class="row">
+                        <p id="modal-information" class="white-text"></p>
+                    </div>
+                    <!-- Progress bar -->
+                    <div class="row">
+                        <div class="preloader-wrapper active">
+                            <div class="spinner-layer spinner-yellow-only">
+                                <div class="circle-clipper left">
+                                    <div class="circle"></div>
+                                </div>
+                                <div class="gap-patch">
+                                    <div class="circle"></div>
+                                </div>
+                                <div class="circle-clipper right">
+                                    <div class="circle"></div>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>

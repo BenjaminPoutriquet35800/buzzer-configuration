@@ -12,7 +12,13 @@
     "electron": "^4.0.6"
   },
   "dependencies": {
+    "app-root-path": "^2.1.0",
     "jquery": "^3.3.1",
-    "materialize-css": "^1.0.0"
+    "material-icons": "^0.3.0",
+    "materialize-css": "^1.0.0",
+    "network": "^0.4.1",
+    "node-wifi": "^2.0.5",
+    "request": "^2.88.0",
+    "sweetalert2": "^8.2.6"
   }
 }

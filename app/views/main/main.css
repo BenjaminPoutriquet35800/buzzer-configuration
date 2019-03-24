@@ -1,0 +1,22 @@
+html,
+body {
+    height: 100%;
+   
+}
+
+.ssid-container {
+    max-height: 310px;
+    overflow-y: auto
+}
+
+.base-container {
+    width: 100%;
+    height: 100%;
+    position: absolute;
+}
+
+.modal-connection {
+   background: black;
+   opacity: 0.5;
+   z-index: 99;
+}

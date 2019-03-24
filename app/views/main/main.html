@@ -1,36 +1,93 @@
 <html>
 
 <head>
-    <title>Configruation</title>
+    <meta charset="UTF-8">
+    <title>Connexion</title>
+    <link rel="stylesheet" href="main.css">
     <link rel="stylesheet" href="../../../node_modules/materialize-css/dist/css/materialize.min.css">
-    <script type="text/javascript">window.$ = window.jQuery = require('jquery');</script>
+    <link rel="stylesheet" href="../../../node_modules/material-icons/iconfont/material-icons.css">
+    <script type="text/javascript">
+        window.$ = window.jQuery = require('jquery');
+    </script>
     <script type="text/javascript" src="../../../node_modules/materialize-css/dist/js/materialize.min.js"></script>
 </head>
 
 <body>
-    <h1>Hello World</h1>
-    <div class="row">
-        <form class="col s12">
-            <div class="row">
-                <div class="input-field col s8">
-                    <input id="input_text" type="text" data-length="10" maxlength="10">
-                    <label for="input_text">Input text</label>
+    <div class="valign-wrapper base-container">
+        <div class="valign" style="width:100%;">
+            <div class="container center-align">
+                <div id="container-progress-bar-search">
+                    <!-- Libellé -->
+                    <div class="row">
+                        <p>Recherche des buzzer en cours . . .</p>
+                    </div>
+                    <!-- Progress bar -->
+                    <div class="row">
+                        <div class="preloader-wrapper active">
+                            <div class="spinner-layer spinner-red-only">
+                                <div class="circle-clipper left">
+                                    <div class="circle"></div>
+                                </div>
+                                <div class="gap-patch">
+                                    <div class="circle"></div>
+                                </div>
+                                <div class="circle-clipper right">
+                                    <div class="circle"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <p>Liste des buzzer's à configurer :</p>
+                </div>
+                <div class="ssid-container">
+                    <div class="row">
+                        <div class="collection" id="ssid-collection"></div>
+                    </div>
+                </div>
+                <div class="row">
+                    <button id="button-scan" style="display:none;" class="btn waves-effect waves-light">Scanner
+                        <i class="material-icons right">network_check</i>
+                    </button>
                 </div>
             </div>
-            <div class="row">
-                <div class="input-field col s12">
-                    <textarea id="textarea2" class="materialize-textarea" data-length="120"></textarea>
-                    <label for="textarea2">Textarea</label>
+        </div>
+    </div>
+    <!-- Modal d'attente de connexion -->
+    <div id="modal-connection" class="valign-wrapper base-container modal-connection" style="display:none;">
+        <div class="valign" style="width:100%;">
+            <div class="container center-align">
+                <div id="container-progress-connection">
+                    <!-- Libellé -->
+                    <div class="row">
+                        <p class="white-text">Connexion au buzzer en cours . . .</p>
+                    </div>
+                    <!-- Progress bar -->
+                    <div class="row">
+                        <div class="preloader-wrapper active">
+                            <div class="spinner-layer spinner-yellow-only">
+                                <div class="circle-clipper left">
+                                    <div class="circle"></div>
+                                </div>
+                                <div class="gap-patch">
+                                    <div class="circle"></div>
+                                </div>
+                                <div class="circle-clipper right">
+                                    <div class="circle"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
-        </form>
+        </div>
     </div>
 </body>
-
-<script type="text/javascript">   
-    $(document).ready(function () {
-        $('input#input_text, textarea#textarea2').characterCounter();
-    });
-</script>
+<script type="text/javascript" src="../../services/wifiService.js"></script>
+<script type="text/javascript" src="../../services/clientCommunicatorService.js"></script>
+<script type="text/javascript" src="../../services/sweetAlertService.js"></script>
+<script type="text/javascript" src="../../utils/dom-helper.js"></script>
+<script type="text/javascript" src="main.js"></script>
 
 </html>

@@ -13,8 +13,8 @@ let mainWindow = null;
 let configurationWindow = null;
 
 app.on('ready', function () {
-    //createMainWindows();
-    createConfigurationWindows();
+    createMainWindows();
+    //createConfigurationWindows();
     initMainMenuTemplate();
     initIpcMainEvents();
 });

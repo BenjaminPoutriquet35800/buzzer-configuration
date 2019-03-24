@@ -35,6 +35,17 @@ function sweetAlertService() {
     }
 
     /**
+     * Affiche un message de type succès
+     */
+    this.showSuccess = function (title, message) {
+        Swal.fire({           
+            type: 'success',
+            title: title,
+            text: message,
+        })
+    }
+
+    /**
      * Affiche un message type pour une erreur
      */
     this.showError = function (title, message) {

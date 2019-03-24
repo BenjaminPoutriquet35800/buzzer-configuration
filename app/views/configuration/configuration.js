@@ -3,10 +3,13 @@
  */
 const titleRetrieveSSID = 'Récupération SSID';
 const titleRetrieveConfiguration = 'Récupération configuration';
+const titleSendConfiguration = 'Enregistrement configuration';
 const messageErrorNoSSID = 'Impossible de récupérer les SSID :(';
 const messageErrorNoConfiguration = 'Impossible de récupérer la configuration :(';
 const messageModalInfoSSID = 'Récupération des SSID en cours . . .';
+const messageModalRegisterConfiguration = 'Enregistrement de la configuration en cours . . .';
 const messageModalInfoConfiguration = 'Récupération de la configuration en cours . . .';
+const messageConfigurationRegistred = 'Configuration enregistrée';
 
 /**
  * Composants
@@ -128,7 +131,8 @@ const populateFormFromBody = function (body) {
         let title = configuration.ssid + ' (Depuis Conf)';
         let option = createOptionElement(configuration.ssid, title);
         $ssidSelector.append(option);
-        $ssidSelector.trigger('contentChanged');
+        // On relance la sélection
+        onSelectValueInSelectorAndTrig($ssidSelector, configuration.ssid);
     }
     // Récupération des choix possible de teams    
     onSelectValueInSelectorAndTrig($teamSelector, configuration.teamChoice);
@@ -165,6 +169,43 @@ const retrieveSSIDListFromBody = function (body) {
         throw new Error(messageErrorNoSSID);
     }
     return ssidList;
+}
+
+/**
+ * Se charge de pousser la configuration à l'ESP8266
+ */
+const sendConfiguration = function () {
+    $modalInformation.text(messageModalRegisterConfiguration);
+    showComponent($modalConfiguration);
+    // Récupère la configuration
+    let configuration = retrieveConfigurationFromForm();
+    // Pousse la configuration sur l'ESP8266
+    clientCommunicatorService.sendConfigurationFromForm(configuration, function (error, response, body) {
+        // Dans tous les cas on cache la modal
+        hiddenComponent($modalConfiguration);
+        if (error) {
+            sweetAlertService.showError(titleSendConfiguration, error.message);
+            return;
+        }
+        sweetAlertService.showSuccess(titleSendConfiguration, messageConfigurationRegistred);
+    });
+}
+
+/**
+ * Récupère l'objet configuration depuis le formulaire
+ */
+const retrieveConfigurationFromForm = function () {
+    let ssid = $switchInput.is(':checked') ? $inputSsid.val() : $ssidSelector.val();
+    let password = $inputPassword.val();
+    let serverIpBGQ = $inputServerBgq.val();
+    let teamChoice = $teamSelector.val();
+    // Construit l'objet que l'on va pousser
+    return {
+        ssid: ssid,
+        password: password,
+        serverIpBGQ: serverIpBGQ,
+        teamChoice: teamChoice
+    }
 }
 
 /**
@@ -255,6 +296,9 @@ const initEvents = function () {
     });
     $switchInput.change(function () {
         switchVisibilityComponantsSsid();
+    });
+    $buttonRegister.click(function () {
+        sendConfiguration();
     })
 }
 

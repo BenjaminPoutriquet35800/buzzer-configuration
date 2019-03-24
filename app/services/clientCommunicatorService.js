@@ -10,6 +10,7 @@ function clientCommunicatorService() {
     const routeSettings = '/settings';
 
     const scheme = 'http://';
+    var gatewayIp = null;
 
     /**
      * Test la connexion à l'ESP pour 
@@ -41,32 +42,69 @@ function clientCommunicatorService() {
     /**
      * Envoie la nouvelle configuration sur l'ESP8266
      */
-    this.sendConfiguration = function () {
-        // Construit la route
-        //const route = getBaseRoute() + routeSettings;
+    this.sendConfigurationFromForm = function (configuration, callBackRetrieve) {
+        console.log('Envoie la configuration');
+        // Construit une requête de type formulaire
+        let buildFormRequest = {
+            form: configuration
+        };
+        console.log(buildFormRequest);
+        // Envoie la requête
+        performRequestPost(buildFormRequest, routeSettings, callBackRetrieve);
         return this;
     }
 
     /**
      * Se charge de jouer une requête avec le verb GET
      * @param {*} endpoint Le point de terminaison que l'on va contacter
-     * @param {*} callBackDone La callBack permettant de récupérer la réponse
+     * @param {*} callBackRetrieve La callBack permettant de récupérer la réponse
      */
     const performRequestGet = function (endpoint, callBackRetrieve) {
-        console.log(`Obtention de l'ip de la gateway en cours`);
-        network.get_active_interface(function (err, obj) {
-            if (err) {
-                console.log(`Récupération de l'ip de la gateway KO`);
-                callBackRetrieve(err, null, null);
-                return;
-            }
-            console.log(`Récupération de l'ip de la gateway OK`);
-            // Construit la route
-            const route = scheme + obj.gateway_ip + endpoint;
+        basePerformRequest(request.get, null, endpoint, callBackRetrieve);
+    }
+
+    /**
+     * Se charge de jouer une requête avec le verb POST
+     * @param {*} endpoint Le point de terminaison que l'on va contacter
+     * @param {*} callBackRetrieve La callBack permettant de récupérer la réponse
+     */
+    const performRequestPost = function (options, endpoint, callBackRetrieve) {
+        basePerformRequest(request.post, options, endpoint, callBackRetrieve);
+    }
+
+    /**
+     * Se charge de jouer une requête grâce à la
+     * Callback passé en paramètre avec le verbs qui va bien
+     * @param {*} callBackSendRequest La callback permettant de lancer la requête
+     * @param {*} endpoint Le point de terminaison que l'on va contacter
+     * @param {*} callBackRetrieve La callBack permettant de récupérer la réponse
+     */
+    const basePerformRequest = function (callBackSendRequest, options, endpoint, callBackRetrieve) {
+        // Fonction permettant de jouer la requete par la suite
+        let sendRequest = function () {
+            const route = scheme + gatewayIp + endpoint;
             console.log('Requete sur : ' + route)
-            request.get(route, function (error, response, body) {
+            callBackSendRequest(route, options, function (error, response, body) {
                 callBackRetrieve(error, response, body);
             });
-        })
+        }
+        // Si l'ip de la gateway n'est pas défini
+        // On vient la récupérer (Opération coûteuse en temps)
+        if (!gatewayIp) {
+            console.log(`Obtention de l'ip de la gateway en cours`);
+            network.get_active_interface(function (err, obj) {
+                if (err) {
+                    console.log(`Récupération de l'ip de la gateway KO`);
+                    callBackRetrieve(err, null, null);
+                    return;
+                }
+                console.log(`Récupération de l'ip de la gateway OK`);
+                gatewayIp = obj.gateway_ip;
+                // Une fois récupérée on lance la requête
+                sendRequest();
+            })
+        } else {
+            sendRequest();
+        }
     }
 }

@@ -4,6 +4,9 @@ Ce projet permet de mettre en place de véritable buzzer pour le jeu **Burger Qu
 
 Ce projet est une extension il a pour but de rendre plus immersif et d'améliorer l'experience de jeu.
 
+<p align="center">
+<img src="https://user-images.githubusercontent.com/25900708/65833059-1977d400-e2cc-11e9-8537-901304cfc95d.png?sanitize=true" height="250"> 
+</p>
 
 # Détails du Projet
 

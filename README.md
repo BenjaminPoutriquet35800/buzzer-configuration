@@ -12,10 +12,10 @@ Ce projet est une extension il a pour but de rendre plus immersif et d'améliore
 
 Le projet est découpé en deux parties :
 
-- Le dossier [arduino-buzzer](https://github.com/BenjaminPoutriquet35800/buzzer-configuration/tree/master/arduino-buzzer) qui permet de mettre en place le programme des buzzer's sur des cartes de type : **Arduino ESP8266**.
+- Le répertoire [arduino-buzzer](https://github.com/BenjaminPoutriquet35800/buzzer-configuration/tree/master/arduino-buzzer) qui permet de mettre en place le programme des buzzer's sur des cartes de type : **Arduino ESP8266**.
 Les détails sur la mise en place ainsi que les composants nécessaires sont indiqués dans ce [répertoire](https://github.com/BenjaminPoutriquet35800/buzzer-configuration/tree/master/arduino-buzzer).
 
-- Le dossier [buzzer-configuration](https://github.com/BenjaminPoutriquet35800/buzzer-configuration/tree/master/buzzer-configuration) contient le programme permettant de configurer les buzzer's une fois montés.
+- Le répertoire [buzzer-configuration](https://github.com/BenjaminPoutriquet35800/buzzer-configuration/tree/master/buzzer-configuration) contient le programme permettant de configurer les buzzer's une fois montés.
 Les détails concernant ce projet sont indiqués dans ce [répertoire](https://github.com/BenjaminPoutriquet35800/buzzer-configuration/tree/master/buzzer-configuration).
 
 # Auteurs

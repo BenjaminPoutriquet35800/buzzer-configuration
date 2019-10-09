@@ -12,6 +12,8 @@ Batterie (Aihasd Micro) | x2 | [Amazon](https://www.amazon.fr/Aihasd-Lithium-Bat
 Inter Glissière (marche/arrêt) | x2 | [Amazon](https://www.amazon.fr/TOOGOO-broches-Positions-commutateur-glissiere/dp/B00X3KCA0M)
 Résistance (10 k Ohms ±1% tolérance) | x2 | [Amazon](https://www.amazon.fr/Assortiment-600-r%C3%A9sistance-30-Valeurs-diff%C3%A9rentes/dp/B01LYGIOW4/ref=sr_1_11?__mk_fr_FR=%C3%85M%C3%85%C5%BD%C3%95%C3%91&keywords=resistance+10k+ohms&qid=1569767647&s=gateway&sr=8-11)
 
+# Installation programme
+
 # Schéma Montage
 
 <p align="center">

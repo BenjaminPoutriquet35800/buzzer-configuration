@@ -14,6 +14,33 @@ Résistance (10 k Ohms ±1% tolérance) | x2 | [Amazon](https://www.amazon.fr/As
 
 # Installation programme
 
+Depuis l'IDE Arduino ouvrir le répertoire où se trouve le programme du Buzzer : 
+
+```
+C:\...\buzzer-configuration\arduino-buzzer\burger-quiz-buzzer
+```
+
+## Ajouter carte Wemos D1 Mini
+
+- Fichier > Préférences 
+    - URL de gestionnaire de cartes supplémentaires : 
+    ```http://arduino.esp8266.com/stable/package_esp8266com_index.json``` .
+    - OK.
+- Outils > Type de carte > Gestionnaire de carte :
+    - Rechercher : **ESP8266**.
+    - Installer la carte : **ESP8266 by ESP8266 community**.
+- Outils > Type de carte > WeMos D1 R1.
+
+## Ajouter des bibliothèques
+
+La meilleure chose à faire est d'utiliser le gestionnaire de bibliothèque Arduino :
+
+- Croquis > Inclure une bibliothèque > Gérer les bibliothèques.
+- Installez la librairie **WebSockets** par **Markus Sattler**.
+- Installer la librairie **SocketIoClient**.
+
+
+
 # Schéma Montage
 
 <p align="center">

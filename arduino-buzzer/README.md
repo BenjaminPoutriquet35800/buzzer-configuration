@@ -43,12 +43,13 @@ La meilleure chose à faire est d'utiliser le gestionnaire de bibliothèque Ardu
 ## Compilation
 
 Vous pouvez à présent faire un test de compilation sur ce bouton : 
-
 <img src="https://user-images.githubusercontent.com/25900708/66480441-0076dc00-ea9f-11e9-907c-39362a1c46bb.PNG?sanitize=true"> 
 
-Si tout est OK branchez votre carte (ESP8266) sur votre PC puis **téléverser** le programme sur la carte. Bouton à droite du bouton de verification.
+Si tout est OK branchez votre carte (ESP8266) sur votre PC puis **téléverser** le programme sur la carte. 
 
-Vous devriez voir apparaître dans la liste de votre réseau un point d'accès Wifi qui commence par : **Esp8266-Burger-Quiz**
+Bouton à droite du bouton de verification.
+
+Vous devriez voir apparaître dans la liste de votre réseau un point d'accès Wifi qui commence par : **Esp8266-Burger-Quiz**.
 
 # Schéma Montage
 

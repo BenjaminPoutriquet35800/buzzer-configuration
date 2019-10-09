@@ -1,5 +1,6 @@
 # Prérequis
 
+- PC Wifi.
 - L'IDE Arduino installé. Disponible [ici](https://www.arduino.cc/en/main/software).
 
 ## Composants
@@ -14,22 +15,22 @@ Résistance (10 k Ohms ±1% tolérance) | x2 | [Amazon](https://www.amazon.fr/As
 
 # Installation programme
 
-Depuis l'IDE Arduino ouvrir le répertoire où se trouve le programme du Buzzer : 
+Depuis l'IDE Arduino, ouvrir le répertoire où se trouve le programme du Buzzer : 
 
 ```
 C:\...\buzzer-configuration\arduino-buzzer\burger-quiz-buzzer
 ```
 
-## Ajouter carte Wemos D1 Mini
+## Ajouter la carte Wemos D1 Mini
 
 - Fichier > Préférences 
     - URL de gestionnaire de cartes supplémentaires : 
-    ```http://arduino.esp8266.com/stable/package_esp8266com_index.json``` .
+    ```http://arduino.esp8266.com/stable/package_esp8266com_index.json```.
     - OK.
 - Outils > Type de carte > Gestionnaire de carte :
     - Rechercher : **ESP8266**.
     - Installer la carte : **ESP8266 by ESP8266 community**.
-- Outils > Type de carte > WeMos D1 R1.
+- Outils > Type de carte > **WeMos D1 R1**.
 
 ## Ajouter des bibliothèques
 
@@ -39,7 +40,15 @@ La meilleure chose à faire est d'utiliser le gestionnaire de bibliothèque Ardu
 - Installez la librairie **WebSockets** par **Markus Sattler**.
 - Installer la librairie **SocketIoClient**.
 
+## Compilation
 
+Vous pouvez à présent faire un test de compilation sur ce bouton : 
+
+<img src="https://user-images.githubusercontent.com/25900708/66480441-0076dc00-ea9f-11e9-907c-39362a1c46bb.PNG?sanitize=true"> 
+
+Si tout est OK branchez votre carte (ESP8266) sur votre PC puis **téléverser** le programme sur la carte. Bouton à droite du bouton de verification.
+
+Vous devriez voir apparaître dans la liste de votre réseau un point d'accès Wifi qui commence par : **Esp8266-Burger-Quiz**
 
 # Schéma Montage
 

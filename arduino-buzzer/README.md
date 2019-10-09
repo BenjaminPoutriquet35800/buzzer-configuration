@@ -38,7 +38,7 @@ La meilleure chose à faire est d'utiliser le gestionnaire de bibliothèque Ardu
 
 - Croquis > Inclure une bibliothèque > Gérer les bibliothèques.
 - Installez la librairie **WebSockets** par **Markus Sattler**.
-- Installer la librairie **SocketIoClient**.
+- Installer la librairie **SocketIoClient** par **Vincent Wyszynski**.
 
 ## Compilation
 

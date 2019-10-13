@@ -51,7 +51,11 @@ Bouton à droite du bouton de verification.
 
 Vous devriez voir apparaître dans la liste de votre réseau un point d'accès Wifi qui commence par : **Esp8266-Burger-Quiz**.
 
-# Schéma Montage
+# Montage
+
+Cette partie montre les différents branchements pour construire le buzzer.
+
+## Schéma de montage
 
 <p align="center">
 <img src="https://user-images.githubusercontent.com/25900708/66477026-5fd0ee00-ea97-11e9-92b5-9326822ec213.PNG?sanitize=true" height="350"> 

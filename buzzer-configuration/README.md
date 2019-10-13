@@ -31,7 +31,7 @@ npm start
 
 # Fonctionnement
 
-Il faut que votre buzzer (ESP8266) soit **allumé** avec le programme **téléversé** ([app-burger-quiz](https://github.com/BenjaminPoutriquet35800/app-burger-quiz)) qui va bien.
+Il faut que votre buzzer (ESP8266) soit **allumé** avec le programme **téléversé** ([arduino-buzzer](https://github.com/BenjaminPoutriquet35800/buzzer-configuration/tree/master/arduino-buzzer)) qui va bien.
 
 **NOTA** : Sous **Windows** il existe un **bug**. En effet Windows **met en cache** les **SSID's** trouvés ([Stack Overflow](https://stackoverflow.com/questions/30786358/how-do-i-reset-the-system-cache-of-wlan-info)). Ce qui pose un problème lorsque vous scanner le réseau avec l'application. Cette dernière ne verra pas le SSID de votre buzzer.
 Pour résoudre cela, la seule manipulation trouvée à ce jour est de cliquer sur la **liste des réseaux** pour lancer le rafraîchissement du cache :

@@ -8,6 +8,13 @@ Ce projet est une extension il a pour but de rendre plus immersif et d'améliore
 <img src="https://user-images.githubusercontent.com/25900708/65833059-1977d400-e2cc-11e9-8537-901304cfc95d.png?sanitize=true" height="250"> 
 </p>
 
+# Installation
+Cloner le répo :
+
+```
+https://github.com/BenjaminPoutriquet35800/buzzer-configuration.git
+```
+
 # Détails du Projet
 
 Le projet est découpé en deux parties :

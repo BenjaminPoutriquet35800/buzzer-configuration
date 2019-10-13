@@ -6,7 +6,7 @@ Ce répertoire contient l'interface permettant de communiquer avec **l'ESP8266**
 ## Prérequis
 
 - Pc avec Wifi.
-- Avoir suvit les instructions du répertoire [app-burger-quiz](https://github.com/BenjaminPoutriquet35800/app-burger-quiz) en amont. 
+- Avoir suvit les instructions du répertoire : [arduino-buzzer](https://github.com/BenjaminPoutriquet35800/buzzer-configuration/tree/master/arduino-buzzer) en amont. 
 - Installer NodeJs : https://nodejs.org/fr/.
 
 # Installation

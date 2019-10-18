@@ -57,13 +57,17 @@ Vous devriez voir apparaître dans la liste de votre réseau un point d'accès W
 
 Cette partie montre les différents branchements pour construire le buzzer ainsi que des indications de montages.
 
-## Bouton poussoir
+## Instruction
 
-Retirer la clavette qui bloque le bouton en position enfoncé lors d'un appui sur ce dernier. 
+### Bouton poussoir
+
+- Retirer la clavette qui bloque le bouton en position enfoncé lors d'un appui sur ce dernier. 
 
 <p align="center">
 <img src="https://user-images.githubusercontent.com/25900708/67088936-b381bc80-f1a6-11e9-8822-0e1e21921e04.PNG?sanitize=true" height="100"> 
 </p>
+
+- Faire un trou pour faire passer le bouton glissière à la base du bouton poussoir.
 
 ## Schéma de montage
 

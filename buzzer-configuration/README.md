@@ -40,6 +40,10 @@ Pour résoudre cela, la seule manipulation trouvée à ce jour est de cliquer su
 <img src="https://user-images.githubusercontent.com/25900708/66716945-e0635780-edd3-11e9-8a8f-f9c4edc49135.PNG?sanitize=true"> 
 </p>
 
+<p align="center">
+<img src="https://user-images.githubusercontent.com/25900708/66715907-1d761c80-edc9-11e9-995f-724a21876108.png?sanitize=true"> 
+</p>
+
 Lancez ensuite le scan si aucun buzzer n'a été trouvé.
 Si tout est OK vous devriez voir apparaître votre buzzer. 
 Cliquer sur la ligne en question pour être rediriger vers l'écran de configuration.

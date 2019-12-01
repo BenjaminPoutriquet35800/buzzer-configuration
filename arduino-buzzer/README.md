@@ -12,8 +12,8 @@ Bouton d'arrêt d'urgence | x2 | [Amazon](https://www.amazon.fr/durgence-Bouton-
 Batterie (Aihasd Micro) | x2 | [Amazon](https://www.amazon.fr/Aihasd-Lithium-Battery-Chargeur-Conseil/dp/B0191EVW0C)
 Inter Glissière (marche/arrêt) | x2 | [Amazon](https://www.amazon.fr/gp/product/B00NQCPRMA/ref=ppx_yo_dt_b_asin_title_o00_s00?ie=UTF8&psc=1)
 Résistance (10 k Ohms ±1% tolérance) | x2 | [Amazon](https://www.amazon.fr/Assortiment-600-r%C3%A9sistance-30-Valeurs-diff%C3%A9rentes/dp/B01LYGIOW4/ref=sr_1_11?__mk_fr_FR=%C3%85M%C3%85%C5%BD%C3%95%C3%91&keywords=resistance+10k+ohms&qid=1569767647&s=gateway&sr=8-11)
-Batterie rechargeable | x4 | [Amazon](https://www.amazon.fr/Capacity-Rechargeable-Environmental-Portable-FR-2500-1/dp/B07K2NTHPK)
-Boitier de rangement (piles 18650) | x2 | [Amazon](https://www.amazon.fr/gp/product/B018Q6TI5W/ref=ppx_yo_dt_b_asin_title_o06_s00?ie=UTF8&psc=1)
+Pile rechargeable 18650 | x4 | [Amazon](https://www.amazon.fr/Skywolfaya-Batteries-Chargeur-Batterie-Rechargeable/dp/B07Z94BJJX/ref=sr_1_3?__mk_fr_FR=%C3%85M%C3%85%C5%BD%C3%95%C3%91&keywords=piles+18650&qid=1575203591&sr=8-3)
+Boitier de rangement (pour piles 18650) | x2 | [Amazon](https://www.amazon.fr/gp/product/B018Q6TI5W/ref=ppx_yo_dt_b_asin_title_o06_s00?ie=UTF8&psc=1)
 
 # Installation programme
 

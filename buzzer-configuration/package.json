@@ -9,7 +9,7 @@
   "author": "",
   "license": "ISC",
   "devDependencies": {
-    "electron": "^4.2.10"
+    "electron": "^7.2.4"
   },
   "dependencies": {
     "app-root-path": "^2.2.1",
